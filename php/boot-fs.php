@@ -2,7 +2,7 @@
 
 // This file needs to parse without error in PHP < 5.3
 
-if ( 'cli' !== PHP_SAPI ) {
+if ( ! ( ! isset( $_SERVER['SERVER_SOFTWARE'] ) && ( php_sapi_name() === 'cli' || ( is_numeric( $_SERVER['argc'] ) && $_SERVER['argc'] > 0 ) ) ) ) {
 	echo "Only CLI access.\n";
 	die(-1);
 }
