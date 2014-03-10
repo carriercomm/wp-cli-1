@@ -108,11 +108,15 @@ class Runner {
 			return $path;
 		}
 
-		if ( $this->cmd_starts_with( array( 'core', 'download' ) ) ) {
-			return getcwd();
+		$dir = $_ENV['PWD'];
+
+		if ( ! $dir ) {
+			$dir = getcwd();
 		}
 
-		$dir = getcwd();
+		if ( $this->cmd_starts_with( array( 'core', 'download' ) ) ) {
+			return $dir;
+		}
 
 		while ( is_readable( $dir ) ) {
 			if ( file_exists( "$dir/wp-load.php" ) ) {
