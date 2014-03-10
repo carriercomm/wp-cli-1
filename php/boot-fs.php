@@ -7,6 +7,19 @@ if ( ! ( ! isset( $_SERVER['SERVER_SOFTWARE'] ) && ( php_sapi_name() === 'cli' |
 	die(-1);
 }
 
+if ( ! defined( 'STDIN' ) ) {
+	define( 'STDIN' , fopen( 'php://stdin', 'r' ) );
+}
+
+if ( ! defined('STDOUT') ) {
+	define( 'STDOUT', fopen( 'php://stdout', 'w' ) );
+}
+
+if ( ! defined('STDERR') ) {
+	define( 'STDERR', fopen( 'php://stderr', 'w' ) );
+}
+
+
 if ( version_compare( PHP_VERSION, '5.3.0', '<' ) ) {
 	printf( "Error: WP-CLI requires PHP %s or newer. You are running version %s.\n", '5.3.0', PHP_VERSION );
 	die(-1);
